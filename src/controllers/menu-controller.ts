@@ -1,46 +1,53 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { prisma } from "@/database/prisma"; // ajuste o caminho de acordo com sua estrutura
-import { MenuItem } from "@prisma/client"; // se você estiver usando o Prisma Client
+import { prisma } from "@/database/prisma"; // ajuste o caminho conforme necessário
+import { MenuItem } from "@prisma/client";
+import { AppError } from "@/utils/AppError"; // Importando o AppError
 
 class MenuController {
-    // Método para listar os itens do menu
-    async list(request: Request, response: Response) {
-        // Se você quiser validar parâmetros da consulta, como categoria, por exemplo
-        const querySchema = z.object({
-            categoryId: z.string().optional(), // pode ser opcional
-            // outros filtros podem ser adicionados aqui
+  static list(arg0: string, list: any) {
+      throw new Error("Method not implemented.");
+  }
+  // Método para listar os itens do menu
+  async list(request: Request, response: Response) {
+    const querySchema = z.object({
+      categoryId: z.string().optional(),
+    });
+
+    try {
+      const queryParams = querySchema.parse(request.query);
+
+      const menuItems: MenuItem[] = await prisma.menuItem.findMany({
+        where: {
+          categoryId: queryParams.categoryId || undefined,
+        },
+        include: {
+          category: true,
+        },
+      });
+
+      return response.status(200).json(menuItems);
+    } catch (error) {
+      if (error instanceof AppError) {
+        return response.status(error.statusCode).json({
+          message: error.message,
         });
+      }
 
-        try {
-            // Validação dos parâmetros da consulta
-            const queryParams = querySchema.parse(request.query);
-            
-            // Buscando os itens do menu com base nos parâmetros da consulta
-            const menuItems: MenuItem[] = await prisma.menuItem.findMany({
-                where: {
-                    categoryId: queryParams.categoryId ? queryParams.categoryId : undefined,
-                },
-                include: {
-                    category: true, // incluir informações da categoria, se necessário
-                },
-            });
+      if (error instanceof z.ZodError) {
+        return response.status(400).json({
+          message: "Erro de validação",
+          errors: error.errors,
+        });
+      }
 
-            return response.status(200).json(menuItems);
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                // Retornar erros de validação do Zod
-                return response.status(400).json({
-                    message: "Erro de validação",
-                    errors: error.errors,
-                });
-            }
-            console.error(error);
-            return response.status(500).json({
-                message: "Erro interno do servidor",
-            });
-        }
+      console.error("Erro interno:", error);
+      return response.status(500).json({
+        message: "Erro interno do servidor",
+      });
     }
+  }
 }
 
-export default new MenuController;
+// Exportação da classe sem instanciá-la
+export { MenuController };

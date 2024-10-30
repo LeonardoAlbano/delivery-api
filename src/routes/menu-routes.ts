@@ -1,9 +1,10 @@
 import { Router } from "express";
-import menuController from "@/controllers/menu-controller";
+import { MenuController } from "@/controllers/menu-controller";
 
 const menuRouter = Router();
+const menuController = new MenuController();
 
 // Rota para listar os itens do menu
-menuRouter.get("/menu", menuController.list);
+menuRouter.get("/", menuController.list);
 
-export default menuRouter;
+export { menuRouter };

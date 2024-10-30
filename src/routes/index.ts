@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { reservationsRoutes } from "./reservations-routes";
-import menuRoutes from "./menu-routes"; // Importe suas rotas de menu
+import { menuRouter } from "./menu-routes"; // Importe suas rotas de menu
 
 const routes = Router();
 
@@ -8,6 +8,6 @@ const routes = Router();
 routes.use("/reservations", reservationsRoutes);
 
 // Prefixo para as rotas de menu
-routes.use("/menu", menuRoutes); // Adicione esta linha para as rotas de menu
+routes.use("/menu", menuRouter); // Adicione esta linha para as rotas de menu
 
 export { routes };
