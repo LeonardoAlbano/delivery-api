@@ -16,6 +16,15 @@ Você foi encarregado de desenvolver um sistema de reserva e consulta de cardáp
 
 ---
 
+Desafios Enfrentados
+Durante o desenvolvimento, enfrentei alguns desafios que não consegui superar completamente:
+
+Imagens do Cardápio: Tentei incluir imagens para cada item do cardápio, mas optei por usar uma imagem padrão por dificuldades técnicas.
+Testes Automatizados: Gostaria de ter implementado mais testes automatizados, especialmente usando Jest, pois estou aprendendo a utilizar essa ferramenta.
+Documentação da API: Não consegui documentar a API no Swagger, o que é uma funcionalidade que eu gostaria de ter implementado.
+Layout do Front-End: Também gostaria de ter dedicado mais tempo ao layout do front-end para aprimorar a usabilidade e a aparência geral.
+Testes no Front-End: Realizar testes no front-end foi um aspecto que não consegui aprofundar tanto quanto gostaria.
+
 
 ### 📦 Pré-requisitos
 
