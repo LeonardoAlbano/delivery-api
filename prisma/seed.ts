@@ -1,7 +1,6 @@
 import { prisma } from "@/database/prisma";
 
 async function seed() {
-    // Primeiro, vamos garantir que temos algumas categorias criadas
     const categoryAppetizers = await prisma.category.create({
         data: {
             name: 'Entradas',
@@ -30,7 +29,6 @@ async function seed() {
         },
     });
 
-    // Agora, vamos criar os itens do menu com suas respectivas categorias
     await prisma.menuItem.createMany({
         data: [
             // Entradas
@@ -38,12 +36,14 @@ async function seed() {
                 name: 'Bruschetta',
                 description: 'Pão tostado com tomate e manjericão',
                 price: 15.00,
+                image: 'https://www.designi.com.br/images/preview/10083364.jpg',
                 categoryId: categoryAppetizers.id,
             },
             {
                 name: 'Caprese',
                 description: 'Salada de tomate, manjericão e mussarela de búfala',
                 price: 18.00,
+                image: 'https://www.designi.com.br/images/preview/10083364.jpg',
                 categoryId: categoryAppetizers.id,
             },
 
@@ -52,12 +52,14 @@ async function seed() {
                 name: 'Spaghetti Carbonara',
                 description: 'Massa com molho à base de ovos, queijo e bacon',
                 price: 35.00,
+                image: 'https://www.designi.com.br/images/preview/10083364.jpg',
                 categoryId: categoryMainDishes.id,
             },
             {
                 name: 'Risoto de Cogumelos',
                 description: 'Arroz arbóreo com cogumelos frescos',
                 price: 40.00,
+                image: 'https://www.designi.com.br/images/preview/10083364.jpg',
                 categoryId: categoryMainDishes.id,
             },
 
@@ -66,12 +68,14 @@ async function seed() {
                 name: 'Tiramisu',
                 description: 'Camadas de mascarpone com café e cacau',
                 price: 20.00,
+                image: 'https://www.designi.com.br/images/preview/10083364.jpg',
                 categoryId: categoryDesserts.id,
             },
             {
                 name: 'Panna Cotta',
                 description: 'Sobremesa italiana com calda de frutas vermelhas',
                 price: 18.00,
+                image: 'https://www.designi.com.br/images/preview/10083364.jpg',
                 categoryId: categoryDesserts.id,
             },
 
@@ -80,12 +84,14 @@ async function seed() {
                 name: 'Vinho Tinto',
                 description: 'Taça de vinho tinto italiano',
                 price: 25.00,
+                image: 'https://www.designi.com.br/images/preview/10083364.jpg',
                 categoryId: categoryDrinks.id,
             },
             {
                 name: 'Água com Gás',
                 description: 'Garrafa de água mineral com gás',
                 price: 8.00,
+                image: 'https://www.designi.com.br/images/preview/10083364.jpg',
                 categoryId: categoryDrinks.id,
             },
         ],

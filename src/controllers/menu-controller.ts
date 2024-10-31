@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { prisma } from "@/database/prisma"; // ajuste o caminho conforme necessário
+import { prisma } from "@/database/prisma";
 import { MenuItem } from "@prisma/client";
-import { AppError } from "@/utils/AppError"; // Importando o AppError
+import { AppError } from "@/utils/AppError";
 
 class MenuController {
   static list(arg0: string, list: any) {
       throw new Error("Method not implemented.");
   }
-  // Método para listar os itens do menu
+
   async list(request: Request, response: Response) {
     const querySchema = z.object({
       categoryId: z.string().optional(),
@@ -49,5 +49,4 @@ class MenuController {
   }
 }
 
-// Exportação da classe sem instanciá-la
 export { MenuController };

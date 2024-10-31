@@ -20,7 +20,8 @@ model MenuItem {
   id          String     @id @default(uuid())
   name        String
   description String?
-  price       Decimal   
+  price       Decimal
+  image       String?    
   categoryId  String
   category    Category   @relation("CategoryMenuItems", fields: [categoryId], references: [id])
   createdAt   DateTime   @default(now())
@@ -28,6 +29,7 @@ model MenuItem {
 
   @@map("menu_item")
 }
+
 
 model Reservation {
   id               String   @id @default(uuid())
